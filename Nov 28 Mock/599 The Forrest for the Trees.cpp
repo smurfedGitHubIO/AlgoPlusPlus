@@ -4,14 +4,18 @@ using namespace std;
 typedef long long int ll;
 
 int main(){
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
   ll t;
   cin >> t;
   map<char, ll> mcl;
   for(ll j=0; j<26; j++){
     mcl[char('A'+j)] = j;
   }
+  string s;
+  vector<bool> vis(26, false);
+  ll trees = 0, acorns = 0;
   while(t--){
-    string s, p;
     vector<string> vs;
     vector<ll> v[26];
     while(1){
@@ -25,8 +29,7 @@ int main(){
       v[p].emplace_back(q);
       v[q].emplace_back(p);
     }
-    vector<bool> vis(26, false);
-    ll trees = 0, acorns = 0;
+    vis.assign(vis.size(), false);
     for(ll i=0; i<s.length(); i+=2){
       ll j = mcl[s[i]];
       if(!vis[j]){
@@ -52,6 +55,7 @@ int main(){
       }
     }
     cout << "There are " << trees << " tree(s) and " << acorns << " acorn(s).\n";
+    trees = acorns = 0;
   }
   return 0;
 }
